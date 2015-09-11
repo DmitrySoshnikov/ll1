@@ -14,10 +14,6 @@ npm install -g ll1
 
 Generator can be used as a node module, or as a CLI tool. Both work with LL(1) grammars written in BNF.
 
-#### Example of the output
-
-![grammar](http://dmitrysoshnikov.com/wp-content/uploads/2015/09/imageedit_6_9018846638.gif)
-
 #### Grammar format
 
 Grammar is presented in BNF (with some variations of EBNF). Raw literal strings should be quoted with double-quotes. Example:
@@ -115,21 +111,21 @@ After the `pg.printTable()` we get the following output:
 
 ```javascript
 
-  Grammar:
+Grammar:
 
-    1.  S -> F
-    2.  S -> "(" S "+" F ")"
-    3.  F -> "id"
+  1.  S -> F
+  2.  S -> "(" S "+" F ")"
+  3.  F -> "id"
 
-  Parsing table:
+Parsing table:
 
-  +---+-----+-----+-----+------+---+
-  |   │ "(" │ "+" │ ")" │ "id" │ $ |
-  +---+-----+-----+-----+------+---+
-  | S │  2  │  -  │  -  │  1   │ - |
-  +---+-----+-----+-----+------+---+
-  | F │  -  │  -  │  -  │  3   │ - |
-  +---+-----+-----+-----+------+---+
++---+-----+-----+-----+------+---+
+|   │ "(" │ "+" │ ")" │ "id" │ $ |
++---+-----+-----+-----+------+---+
+| S │  2  │  -  │  -  │  1   │ - |
++---+-----+-----+-----+------+---+
+| F │  -  │  -  │  -  │  3   │ - |
++---+-----+-----+-----+------+---+
 
 ```
 
@@ -149,18 +145,18 @@ We get the following output for the first sets:
 
 ```javascript
 
-    First set:
-    +--------+-----------+
-    | Symbol │ First set |
-    +--------+-----------+
-    | S      │ "id", "(" |
-    +--------+-----------+
-    | F      │ "id"      |
-    +--------+-----------+
-    | "id"   │ "id"      |
-    +--------+-----------+
-    | "("    │ "("       |
-    +--------+-----------+
+First set:
++--------+-----------+
+| Symbol │ First set |
++--------+-----------+
+| S      │ "id", "(" |
++--------+-----------+
+| F      │ "id"      |
++--------+-----------+
+| "id"   │ "id"      |
++--------+-----------+
+| "("    │ "("       |
++--------+-----------+
 
 ```
 
