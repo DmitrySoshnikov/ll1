@@ -32,6 +32,37 @@ exports.GRAMMAR_LEX_RULES = {
 
 exports.GRAMMAR_START_SYMBOL = 'E';
 
+exports.GRAMMAR_FIRST_SETS = {
+  E       : { '"id"': true, NUMBER: true, '"("': true },
+  T       : { '"id"': true, NUMBER: true, '"("': true },
+  F       : { '"id"': true, NUMBER: true, '"("': true },
+  '"id"'  : { '"id"': true },
+  NUMBER  : { NUMBER: true }, // NUMBER is a lexVar (terminal)
+  '"("'   : { '"("': true },
+  "E'"    : { '"+"': true, 'ε': true },
+  '"+"'   : { '"+"': true },
+  "T'"    : { '"*"': true, 'ε': true },
+  '"*"'   : { '"*"': true }
+};
+
+exports.GRAMMAR_FOLLOW_SETS = {
+  E       : { '$': true, '")"': true },
+  "E'"    : { '$': true, '")"': true },
+  T       : { '"+"': true, '$': true, '")"': true },
+  "T'"    : { '"+"': true, '$': true, '")"': true },
+  F       : { '"*"': true, '"+"': true, '$': true, '")"': true }
+};
+
+exports.GRAMMAR_PREDICT_SETS = {
+  '1. E -> T E\''       : { '"id"': true, NUMBER: true, '"("': true },
+  '2. E\' -> "+" T E\'' : { '"+"': true },
+  '3. T -> F T\''       : { '"id"': true, NUMBER: true, '"("': true },
+  '4. T\' -> "*" F T\'' : { '"*"': true },
+  '5. F -> "id"'        : { '"id"': true },
+  '6. F -> NUMBER'      : { NUMBER: true },
+  '7. F -> "(" E ")"'   : { '"("': true }
+};
+
 exports.DEFAULT_GRAMMAR = `
   E  -> T E'
   E' -> "+" T E'

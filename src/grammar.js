@@ -266,7 +266,7 @@ export default class Grammar {
 
     return grammar
       .split('\n')
-      .filter(production => !!production);
+      .filter(production => !!production.trim());
   }
 
   /**
