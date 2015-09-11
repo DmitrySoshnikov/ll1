@@ -1,4 +1,4 @@
-## LL(1) Parser generator
+## LL(1) Parser generator [![Build Status](https://travis-ci.org/DmitrySoshnikov/ll1.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/ll1)
 
 The `ll1` implements non-recursive [LL(1) parsing](https://en.wikipedia.org/wiki/LL_parser) algorithm, building a _Parsing table_ from _First_ and _Follow_ sets.
 
