@@ -21,7 +21,16 @@ exports.GRAMMAR_TERMINALS = [`"+"`, `"*"`, `"id"`, `"("`, `")"`];
 exports.GRAMMAR_NON_TERMINALS = [`E`, `E'`, `T`, `T'`, `F`];
 exports.GRAMMAR_LEX_VARS = ['NUMBER'];
 
-exports.GRAMMAR_LEX_RULES = {
+exports.GRAMMAR_LEX_RULES = `
+  "("                 : "("
+  ")"                 : ")"
+  "+"                 : "+"
+  "*"                 : "*"
+  "id"                : "id"
+  [0-9]+("."[0-9]+)?  : NUMBER
+`;
+
+exports.GRAMMAR_NORMALIZED_LEX_RULES = {
   '"("' : '"("',
   '")"' : '")"',
   '"+"' : '"+"',

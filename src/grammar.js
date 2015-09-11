@@ -13,7 +13,7 @@ import {EPSILON} from './special-symbols';
 export default class Grammar {
 
   /**
-   * User may pass grammar in two representations:
+   * User may pass grammar in several representations:
    *
    * As an array:
    *
@@ -63,22 +63,33 @@ export default class Grammar {
    *
    * Note: if no `lex` is provided, the lexical grammar is inferred
    * from the list of all terminals in the `bnf` grammar.
+   *
+   * The lexical grammar may also be provided as a string:
+   *
+   *   lex: `
+   *     "a"                  : "a"
+   *     "("                  : "("
+   *     ")"                  : ")"
+   *     "+"                  : "+"
+   *     [0-9]+("."[0-9]+)?\b : NUMBER
+   *   `
    */
   constructor(grammar) {
-    this._orignal = this._orignalBnf = grammar;
-    this._lexRules = null;
+    this._orignalBnf = grammar;
+    this._orignalLex = null;
 
     // Case when both `lex` and `bnf` are passed.
     if (Object.prototype.toString.call(grammar) === '[object Object]') {
       this._orignalBnf = grammar.bnf;
-      this._lexRules = grammar.lex;
+      this._orignalLex = grammar.lex;
     }
 
     this._terminals = null;
     this._nonTerminals = null;
     this._lexVars = null;
 
-    this._grammar = this._normalize(this._orignalBnf);
+    this._lexRules = this._normalizeLex(this._orignalLex);
+    this._grammar = this._normalizeBnf(this._orignalBnf);
   }
 
   /**
@@ -89,10 +100,17 @@ export default class Grammar {
   }
 
   /**
-   * Retusn original representation of the grammar.
+   * Retusn original representation of the lexical grammar.
    */
-  getOriginal() {
-    return this._orignal;
+  getOriginalLex() {
+    return this._orignalLex;
+  }
+
+  /**
+   * Retusn original representation of the bnf grammar.
+   */
+  getOriginalBnf() {
+    return this._orignalBnf;
   }
 
   /**
@@ -211,6 +229,25 @@ export default class Grammar {
   }
 
   /**
+   * Normalizes lexical grammar which can be presented
+   * as a plain object or a string.
+   */
+  _normalizeLex(lex) {
+    if (typeof lex !== 'string') {
+      return lex;
+    }
+
+    let normalizedLex = {};
+
+    this._toArray(lex).forEach(lexRule => {
+      let [LHS, RHS] = this._splitLexParts(lexRule);
+      normalizedLex[LHS] = RHS;
+    });
+
+    return normalizedLex;
+  }
+
+  /**
    * Transforms original grammar to internal representation
    * for faster access of needed parts.
    *
@@ -226,12 +263,12 @@ export default class Grammar {
    *   3: [3, 'F', ['"a"']]
    * };
    */
-  _normalize(grammar) {
-    let normalizedGrammar = {};
+  _normalizeBnf(grammar) {
+    let normalizedBnf = {};
     let currentNonTerminal;
 
     this._toArray(grammar).forEach((production, k) => {
-      let [LHS, RHS] = this._splitParts(production.trim());
+      let [LHS, RHS] = this._splitBnfParts(production.trim());
       let productionNumber = k + 1;
 
       // LHS of the first rule is considered as "Start symbol".
@@ -249,10 +286,10 @@ export default class Grammar {
       // for short notations like ` | (S "+" F)`.
       currentNonTerminal = LHS;
 
-      normalizedGrammar[productionNumber] = [productionNumber, LHS, RHS];
+      normalizedBnf[productionNumber] = [productionNumber, LHS, RHS];
     });
 
-    return normalizedGrammar;
+    return normalizedBnf;
   }
 
   /**
@@ -269,6 +306,14 @@ export default class Grammar {
       .filter(production => !!production.trim());
   }
 
+  _splitLexParts(lexRule) {
+    var lastColonIdx = lexRule.lastIndexOf(':');
+    return [
+      lexRule.slice(0, lastColonIdx).trim(),
+      lexRule.slice(lastColonIdx + 1).trim(),
+    ];
+  }
+
   /**
    * Returns a splitted production by parts:
    *
@@ -276,7 +321,7 @@ export default class Grammar {
    *
    * ['S', ['A', '"+"', 'B', '" "', 'C']]
    */
-  _splitParts(production) {
+  _splitBnfParts(production) {
     let splitter = production.indexOf('->') !== -1 ? '->' : '|';
     let splitted = production.split(splitter);
     let LHS = splitted[0].trim();
