@@ -126,12 +126,14 @@ export default class Grammar {
    */
   getNonTerminals() {
     if (!this._nonTerminals) {
-      this._nonTerminals = [];
+      let nonTerminals = {};
       let grammarEntries = this.get();
 
       for (let k in grammarEntries) {
-        nonTerminals.push(this.getLHS(grammarEntries[k]));
+        nonTerminals[this.getLHS(grammarEntries[k])] = true;
       }
+
+      this._nonTerminals = Object.keys(nonTerminals);
     }
     return this._nonTerminals;
   }
