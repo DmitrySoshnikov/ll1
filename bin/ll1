@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var opts = require('nomnom')
+  .script('ll1')
+  .options({
+    grammar: {
+      abbr: 'g',
+      help: 'File containing LL(1) grammar',
+      required: true
+    },
+    table: {
+      abbr: 't',
+      help: 'Generate and output parsing table',
+      flag: true,
+    },
+    sets: {
+      abbr: 's',
+      default: 'all',
+      help: 'Generate and output parsing sets (all/first/follow/predict)',
+    },
+    output: {
+      abbr: 'o',
+      default: './ll1-parser.js',
+      help: 'Path to the output file for the generated parser',
+      metavar: 'FILE'
+    },
+  })
+  .parse();
+
+// TODO
+console.log(opts);
