@@ -12,7 +12,7 @@
     "build": "rm -rf dist; babel src/ --out-dir dist/",
     "watch": "babel src/ --out-dir dist/ --watch",
     "test": "jest",
-    "prepublish": "npm run build"
+    "prepublish": "jest && npm run build"
   },
   "bin": {
     "jscodeshift": "./bin/ll1"
@@ -38,6 +38,10 @@
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "preprocessCachingDisabled": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "src/__tests__/test-data.js"
+    ],
     "testPathDirs": [
       "src",
       "bin"

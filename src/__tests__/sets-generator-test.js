@@ -7,9 +7,9 @@
 
 jest.autoMockOff();
 
-var SetsGenerator = require('../sets-generator');
+let SetsGenerator = require('../sets-generator');
 
-var {
+let {
 
   GRAMMAR,
   GRAMMAR_LEX_RULES,
@@ -17,12 +17,12 @@ var {
   GRAMMAR_FOLLOW_SETS,
   GRAMMAR_PREDICT_SETS,
 
-} = require('./grammars-data');
+} = require('./test-data');
 
 describe('SetsGenerator', () => {
 
   it('constructs First set', () => {
-    var sg = new SetsGenerator({
+    let sg = new SetsGenerator({
       lex: GRAMMAR_LEX_RULES,
       bnf: GRAMMAR,
     });
@@ -30,7 +30,7 @@ describe('SetsGenerator', () => {
   });
 
   it('constructs Follow set', () => {
-    var sg = new SetsGenerator({
+    let sg = new SetsGenerator({
       lex: GRAMMAR_LEX_RULES,
       bnf: GRAMMAR,
     });
@@ -38,7 +38,7 @@ describe('SetsGenerator', () => {
   });
 
   it('constructs Follow set', () => {
-    var sg = new SetsGenerator({
+    let sg = new SetsGenerator({
       lex: GRAMMAR_LEX_RULES,
       bnf: GRAMMAR,
     });

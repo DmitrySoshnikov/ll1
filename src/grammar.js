@@ -67,10 +67,10 @@ export default class Grammar {
    * The lexical grammar may also be provided as a string:
    *
    *   lex: `
-   *     "a"                  : "a"
-   *     "("                  : "("
-   *     ")"                  : ")"
-   *     "+"                  : "+"
+   *     "a" : "a"
+   *     "(" : "("
+   *     ")" : ")"
+   *     "+" : "+"
    *     [0-9]+("."[0-9]+)?\b : NUMBER
    *   `
    */
@@ -162,8 +162,8 @@ export default class Grammar {
   getLexVars() {
     if (!this._lexVars) {
       this._lexVars = [];
-      var lexRules = this.getLexRules();
-      for (var k in lexRules) {
+      let lexRules = this.getLexRules();
+      for (let k in lexRules) {
         if (!this.isTerminal(lexRules[k])) {
           this._lexVars.push(lexRules[k]);
         }
@@ -307,7 +307,7 @@ export default class Grammar {
   }
 
   _splitLexParts(lexRule) {
-    var lastColonIdx = lexRule.lastIndexOf(':');
+    let lastColonIdx = lexRule.lastIndexOf(':');
     return [
       lexRule.slice(0, lastColonIdx).trim(),
       lexRule.slice(lastColonIdx + 1).trim(),

@@ -7,7 +7,7 @@
 
 jest.autoMockOff();
 
-var Grammar = require('../grammar');
+let Grammar = require('../grammar');
 
 let {
 
@@ -23,7 +23,7 @@ let {
   DEFAULT_LEX_VARS,
   DEFAULT_LEX_RULES,
 
-} = require('./grammars-data');
+} = require('./test-data');
 
 function testGrammar(
   grammar,
