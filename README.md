@@ -1,4 +1,4 @@
-## LL(1) Parse generator
+## LL(1) Parser generator
 
 The `ll1` implements non-recursive [LL(1) parsing](https://en.wikipedia.org/wiki/LL_parser) algorithm, building a _Parsing table_ from _First_ and _Follow_ sets.
 
@@ -13,6 +13,10 @@ npm install -g ll1
 ### Usage
 
 Generator can be used as a node module, or as a CLI tool. Both work with LL(1) grammars written in BNF.
+
+#### Example of output
+
+![grammar](http://dmitrysoshnikov.com/wp-content/uploads/2015/09/imageedit_10_9190665297.gif)
 
 #### Grammar format
 
@@ -30,14 +34,14 @@ The lexical grammar can also be provided explicitly in case you need to use lexi
 
 ```javascript
 let grammar = {
-  lex: {
-    '"("' : '"("',
-    '")"' : '")"',
-    '"+"' : '"+"',
-    '"*"' : '"*"',
-    '"id"': '"id"',
-    '[0-9]+("."[0-9]+)?': `NUMBER`
-  },
+  lex: `
+    "("  : "("
+    ")"  : ")"
+    "+"  : "+"
+    "*"  : "*"
+    "id" : "id"
+    [0-9]+("."[0-9]+)?  : NUMBER
+  `,
 
   bnf: `
     E  -> T E'
