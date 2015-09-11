@@ -1,8 +1,8 @@
 ## LL(1) Parse generator
 
-The `ll1` implements non-recursive [LL(1) parsing](https://en.wikipedia.org/wiki/LL_parser) algorithm, building a _parsing table_ from _First_ and _Follow_ sets.
+The `ll1` implements non-recursive [LL(1) parsing](https://en.wikipedia.org/wiki/LL_parser) algorithm, building a _Parsing table_ from _First_ and _Follow_ sets.
 
-The tool can be used in educational process in compilers course, as well as for automatic generating parsers for LL(1) grammars (note, the grammar should not contain _left recursion_, and should already be _left factored_ if needed).
+The tool can be used for educational purposes in a compilers course, to trace and analyze an LL(1) Parsing table, as well as for automatic parsers generation for LL(1) grammars (note, the grammar should not contain _left recursion_, and should already be _left factored_ if needed).
 
 ### Installation
 
@@ -10,7 +10,7 @@ The tool can be used in educational process in compilers course, as well as for 
 npm install -g ll1
 ```
 
-### Uage
+### Usage
 
 Generator can be used as a node module, or as a CLI tool. Both work with LL(1) grammars written in BNF.
 
