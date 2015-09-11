@@ -259,7 +259,7 @@ export default class SetsGenerator {
         throw new Error('Unknow set');
     }
 
-    console.log('\n' + lhsHeader + ':\n');
+    console.log('\n' + rhsHeader + ':\n');
 
     let printer = new TablePrinter({
       head: [lhsHeader, rhsHeader],

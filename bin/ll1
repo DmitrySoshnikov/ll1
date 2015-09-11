@@ -2,6 +2,11 @@
 
 'use strict';
 
+var ParserGenerator = require('../dist/parser-generator');
+var SetsGenerator = require('../dist/sets-generator');
+
+var fs = require('fs');
+
 var opts = require('nomnom')
   .script('ll1')
   .options({
@@ -17,17 +22,60 @@ var opts = require('nomnom')
     },
     sets: {
       abbr: 's',
-      default: 'all',
       help: 'Generate and output parsing sets (all/first/follow/predict)',
+    },
+    parse: {
+      abbr: 'p',
+      help: 'Parse a string and checks for acceptance',
     },
     output: {
       abbr: 'o',
-      default: './ll1-parser.js',
       help: 'Path to the output file for the generated parser',
       metavar: 'FILE'
     },
   })
   .parse();
 
-// TODO
-console.log(opts);
+function main() {
+
+  var grammar = JSON.parse(fs.readFileSync(opts.grammar, 'utf-8'));
+  var pg = new ParserGenerator(grammar);
+
+  // Sets.
+  if (opts.sets) {
+    var sets = opts.sets;
+    var sg = new SetsGenerator(grammar);
+
+    if (sets.indexOf('first') !== -1 || sets === 'all') {
+      sg.printSet(sg.getFirstSets());
+    }
+
+    if (sets.indexOf('follow') !== -1 || sets === 'all') {
+      sg.printSet(sg.getFollowSets());
+    }
+
+    if (sets.indexOf('predict') !== -1 || sets === 'all') {
+      sg.printSet(sg.getPredictSets());
+    }
+  }
+
+  // Parsing table.
+  if (opts.table) {
+    pg.printTable();
+  }
+
+  if (opts.parse) {
+    var parser = pg.generate();
+    parser.parse(opts.parse);
+  }
+
+  // Generates parser file.
+  if (opts.output) {
+    console.log('Not implemented yet, sorry.');
+  }
+
+}
+
+if (require.main === module) {
+    main();
+}
