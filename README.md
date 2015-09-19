@@ -59,20 +59,20 @@ let grammar = {
 
 The `ε` ("empty" string, _epsilon_) value can either be specified explicitly, or presented as an empty string (omitted).
 
-See some examples of the grammars [here](https://github.com/DmitrySoshnikov/ll1/blob/master/src/__tests__/grammars-data.js).
+See some examples of the grammars [here](https://github.com/DmitrySoshnikov/ll1/blob/master/src/__tests__/test-data.js).
 
 #### Usage as CLI
 
 The CLI tool is the simplest form when we need quickly analyze some grammar. For example, this command will print parsing table for the grammar from `~/grammar.json` file:
 
 ```
-./ll1 --grammar ~/grammar.json --table
+./bin/ll1 --grammar ~/grammar.json --table
 ```
 
 A string can be parsed and checked for acceptance via the `--parse` option:
 
 ```
-./ll1 --grammar ~/grammar.json --parse "(id + id)"
+./bin/ll1 --grammar ~/grammar.json --parse "(id + id)"
 ```
 
 #### Usage as a module
