@@ -15,7 +15,7 @@
     "prepublish": "jest && npm run build"
   },
   "bin": {
-    "jscodeshift": "./bin/ll1"
+    "ll1": "./bin/ll1"
   },
   "keywords": [
     "parser",
