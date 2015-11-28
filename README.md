@@ -1,5 +1,7 @@
 ## LL(1) Parser generator [![Build Status](https://travis-ci.org/DmitrySoshnikov/ll1.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/ll1)
 
+Note: see also generic [syntax](https://github.com/DmitrySoshnikov/syntax) repo, that implements both, LR and LL algorithms.
+
 The `ll1` implements non-recursive [LL(1) parsing](https://en.wikipedia.org/wiki/LL_parser) algorithm, building a _Parsing table_ from _First_ and _Follow_ sets.
 
 The tool can be used for educational purposes in a compilers course, to trace and analyze an LL(1) Parsing table, as well as for automatic parsers generation for LL(1) grammars (note, the grammar should not contain _left recursion_, and should already be _left factored_ if needed).
