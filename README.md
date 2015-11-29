@@ -68,13 +68,13 @@ See some examples of the grammars [here](https://github.com/DmitrySoshnikov/ll1/
 The CLI tool is the simplest form when we need quickly analyze some grammar. For example, this command will print parsing table for the grammar from `~/grammar.json` file:
 
 ```
-./bin/ll1 --grammar ~/grammar.json --table
+./bin/ll1 --grammar examples/simple.ll1 --table
 ```
 
 A string can be parsed and checked for acceptance via the `--parse` option:
 
 ```
-./bin/ll1 --grammar ~/grammar.json --parse "(id + id)"
+./bin/ll1 --grammar examples/simple.ll1 --parse "(id + id)"
 ```
 
 #### Usage as a module
