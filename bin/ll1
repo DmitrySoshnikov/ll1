@@ -37,8 +37,16 @@ var opts = require('nomnom')
   .parse();
 
 function main() {
+  var grammar;
 
-  var grammar = JSON.parse(fs.readFileSync(opts.grammar, 'utf-8'));
+  var grammarData = fs.readFileSync(opts.grammar, 'utf-8');
+
+  try {
+    grammar = JSON.parse(grammarData);
+  } catch (e) {
+    grammar = grammarData;
+  }
+
   var pg = new ParserGenerator(grammar);
 
   // Sets.

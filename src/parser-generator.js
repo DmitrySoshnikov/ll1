@@ -74,7 +74,7 @@ export default class ParserGenerator {
   printTable() {
     this._grammar.print();
 
-    console.log('Parsing table:\n');
+    console.log('LL(1) parsing table:\n');
 
     let tokens = this._grammar.getTerminals()
       .concat(this._grammar.getLexVars());
