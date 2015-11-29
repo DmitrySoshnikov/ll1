@@ -65,7 +65,7 @@ See some examples of the grammars [here](https://github.com/DmitrySoshnikov/ll1/
 
 #### Usage as CLI
 
-The CLI tool is the simplest form when we need quickly analyze some grammar. For example, this command will print parsing table for the grammar from `~/grammar.json` file:
+The CLI tool is the simplest form when we need quickly analyze some grammar. For example, this command will print parsing table for the grammar from `examples/simple.ll1` file:
 
 ```
 ./bin/ll1 --grammar examples/simple.ll1 --table
