@@ -1,6 +1,6 @@
 {
   "name": "ll1",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An educational LL(1) parser generator",
   "repository": {
     "type": "git",
